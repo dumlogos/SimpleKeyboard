@@ -33,11 +33,13 @@ class SKSound:
                  note: MusicNote,
                  bitrate: int,
                  amplitude: float = 1,
-                 duration: float = 1.0):
+                 duration: float = 1.0,
+                 name: str = None):
         self.note = note
         self.bitrate = bitrate
         self.amplitude = amplitude
         self.duration = duration
+        self.name = name
 
     def play(self) -> None:
         logger.warning(f"Sound {self.note} is played")

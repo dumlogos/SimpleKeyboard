@@ -5,6 +5,7 @@ import os
 from pynput import keyboard
 
 from simplekeyboard.sounds.sounds import MusicNote, SKSound
+from simplekeyboard.gui.gui import KeyboardWindow
 # from simplekeyboard.config.config import BITRATE
 
 logging.basicConfig(
@@ -64,11 +65,18 @@ def on_release(key):
 def test_main():
     logger.debug("Running test sound keyboard")
     for note in MusicNote:
-        sounds[note.name] = (SKSound(note, 44100, amplitude=0.3, duration=0.1))
+        sounds[note.name] = (SKSound(
+            note,
+            44100,
+            amplitude=0.3,
+            duration=0.1,
+            name=note.name))
+    logger.debug("Running test gui")
     with keyboard.Listener(
         on_press=on_press,
         on_release=on_release
     ) as listener:
+        kwindow = KeyboardWindow(sounds).run()
         listener.join()
 
 
